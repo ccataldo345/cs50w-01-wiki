@@ -14,6 +14,7 @@ def title(request, title):
     find_title = util.get_entry(title)
     if not find_title:
         return render(request, "encyclopedia/wiki/error.html", {
+            "title": title,
             "error_message": "Your requested page was not found."
         })
     return render(request, "encyclopedia/wiki/title.html", {
@@ -23,8 +24,20 @@ def title(request, title):
 
 def search(request):
     query = request.GET.get('q').capitalize()
-    if query in util.list_entries():
+    entries = util.list_entries()
+    substring = [i for i in entries if query in i]
+    if query in entries:
         return redirect(f"wiki/{query}")
+    elif substring:
+        return render(request, "encyclopedia/search.html", {
+            "query": query,
+            "entries": substring
+        })
+    else:
+        return render(request, "encyclopedia/wiki/error.html", {
+            "title": query,
+            "error_message": "Your requested page was not found."
+        })
 
 
 def new():
