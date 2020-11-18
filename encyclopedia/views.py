@@ -40,8 +40,10 @@ def search(request):
         })
 
 
-def new():
-    return None
+def new(request):
+    return render(request, "encyclopedia/new.html", {
+        "title": request.GET.get('title')
+    })
 
 
 def edit():

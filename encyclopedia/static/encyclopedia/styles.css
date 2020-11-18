@@ -17,6 +17,17 @@ textarea {
     width: 80%;
 }
 
+textarea#title {
+    max-width: 100%;
+    max-height: 2em;
+    resize: none;
+}
+
+textarea#text {
+    max-width: 100%;
+    max-height: 300px;
+}
+
 .main {
     padding: 10px;
 }
