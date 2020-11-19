@@ -41,9 +41,18 @@ def search(request):
 
 
 def new(request):
-    return render(request, "encyclopedia/new.html", {
-        "title": request.GET.get('title')
-    })
+    if request.method == "POST":
+        title = request.POST.get('title').capitalize()
+        content = request.POST.get('content')
+        if title not in util.list_entries():
+            util.save_entry(title, content)
+            return redirect(f"wiki/{title}")
+        else:
+            return render(request, "encyclopedia/wiki/error.html", {
+                "title": title,
+                "error_message": "This page already exists!"
+            })
+    return render(request, "encyclopedia/new.html")
 
 
 def edit():

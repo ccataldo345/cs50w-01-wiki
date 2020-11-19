@@ -9,15 +9,16 @@ Encyclopedia
 <br>
 
 <div class="new_entry">
-  <form method="GET" action="wiki/{{ title }}">
+  <form method="POST">
+    {% csrf_token %}
     <label for="title">Please enter the title:</label>
     <br>
-    <textarea id="title" name="title" rows="1" cols="32" maxlength="32"></textarea>
+    <textarea id="title" name="title" rows="1" cols="32" maxlength="32" required></textarea>
     <br>
     <br>
-    <label for="text">Please enter the text:</label>
+    <label for="content">Please enter the content:</label>
     <br>
-    <textarea id="text" name="text" rows="5" cols="32" maxlength="1024"></textarea>
+    <textarea id="content" name="content" rows="5" cols="32" maxlength="1024"></textarea>
     <br><br>
     <input type="submit" value="Submit">
   </form>
