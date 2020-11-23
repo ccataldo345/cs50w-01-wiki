@@ -14,7 +14,7 @@ Encyclopedia
     {% csrf_token %}
     <label for="content">Edit the content:</label>
     <br>
-    <textarea id="content" name="content" rows="5" cols="32" maxlength="1024">{{ content }}</textarea>
+    {{ form.content }}
     <br><br>
     <input type="submit" value="Submit">
   </form>

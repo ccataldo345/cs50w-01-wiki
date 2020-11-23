@@ -2,8 +2,14 @@ from django.shortcuts import render, redirect
 from . import util
 import markdown2
 import random
-from django.http import HttpResponseRedirect
-from django.urls import reverse
+from django import forms
+
+
+class PageForm(forms.Form):
+    title = forms.CharField(max_length=32, widget=forms.Textarea(
+        attrs={'class': 'textarea', 'id': 'title', 'required': True}))
+    content = forms.CharField(max_length=1024, widget=forms.Textarea(
+        attrs={'class': 'textarea', 'id': 'content'}))
 
 
 def index(request):
@@ -63,17 +69,20 @@ def new(request):
                 "title": title,
                 "error_message": "This page already exists!"
             })
-    return render(request, "encyclopedia/new.html")
+    return render(request, "encyclopedia/new.html", {
+        "form": PageForm()
+    })
 
 
 def edit(request):
     title = request.GET.get('q')
     find_title = util.get_entry(title)
+    content = markdown2.markdown(find_title)
     if request.method == "POST":
         content = request.POST.get('content')
         util.save_entry(title, content)
         return redirect(f"wiki/{title}")
     return render(request, "encyclopedia/edit.html", {
         "title": title,
-        "content": markdown2.markdown(find_title)
+        "form": PageForm(initial={'content': content})
     })

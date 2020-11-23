@@ -13,12 +13,12 @@ Encyclopedia
     {% csrf_token %}
     <label for="title">Please enter the title:</label>
     <br>
-    <textarea id="title" name="title" rows="1" cols="32" maxlength="32" required></textarea>
+    {{ form.title }}
     <br>
     <br>
     <label for="content">Please enter the content:</label>
     <br>
-    <textarea id="content" name="content" rows="5" cols="32" maxlength="1024"></textarea>
+    {{ form.content }}
     <br><br>
     <input type="submit" value="Submit">
   </form>
