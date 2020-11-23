@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from . import util
 import markdown2
 import random
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 def index(request):
@@ -20,6 +22,14 @@ def title(request, title):
     return render(request, "encyclopedia/wiki/title.html", {
         "title": title,
         "content": markdown2.markdown(find_title)
+    })
+
+
+def rnd_title(request):
+    rnd_title = random.choice(util.list_entries())
+    return render(request, "encyclopedia/wiki/title.html", {
+        "title": rnd_title,
+        "content": markdown2.markdown(util.get_entry(rnd_title))
     })
 
 
