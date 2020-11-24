@@ -59,15 +59,20 @@ def search(request):
 
 def new(request):
     if request.method == "POST":
-        title = request.POST.get('title').capitalize()
-        content = request.POST.get('content')
-        if title not in util.list_entries():
-            util.save_entry(title, content)
-            return redirect(f"wiki/{title}")
+        form = PageForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            content = form.cleaned_data['content']
+            if title not in util.list_entries():
+                util.save_entry(title, content)
+                return redirect(f"wiki/{title}")
+            else:
+                return render(request, "encyclopedia/wiki/error.html", {
+                    "error_message": "This page already exists!"
+                })
         else:
             return render(request, "encyclopedia/wiki/error.html", {
-                "title": title,
-                "error_message": "This page already exists!"
+                "error_message": "Your input is invalid!"
             })
     return render(request, "encyclopedia/new.html", {
         "form": PageForm()
