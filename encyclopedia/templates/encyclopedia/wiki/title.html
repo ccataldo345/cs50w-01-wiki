@@ -6,10 +6,11 @@ Encyclopedia
 
 {% block body %}
 {{ content | safe }}
+
 <br>
 <br>
 <form method="GET" action="{% url 'edit' %}">
-    <button class="edit" type="submit" value="{{ title }}" name="q">Edit
+    <button class="edit btn btn-primary" type="submit" value="{{ title }}" name="q">Edit
 </form>
 
 {% endblock %}

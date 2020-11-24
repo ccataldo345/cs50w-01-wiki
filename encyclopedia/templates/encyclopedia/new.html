@@ -20,7 +20,9 @@ Encyclopedia
     <br>
     {{ form.content }}
     <br><br>
-    <input type="submit" value="Submit">
+    {{ error_message }}
+    <br><br>
+    <input class="btn btn-primary" type="submit" value="Submit">
   </form>
 </div>
 {% endblock %}
