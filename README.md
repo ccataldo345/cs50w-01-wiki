@@ -1,4 +1,4 @@
-##Harvard CS50’s Web Programming with Python and JavaScript  
+### Harvard CS50’s Web Programming with Python and JavaScript  
 
 Harvard University’s online course.  
 Design and implementation of web apps with Python, JavaScript, and SQL using frameworks like Django, React, and Bootstrap.  
